@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LHMKG7PC5V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-LHMKG7PC5V');
+  </script>
+  <meta charset="utf-8">
+  <meta name="description" content="Instance Segmentation of Scene Sketches Using Natural Image Priors.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instance Segmentation of Scene Sketches Using Natural Image Priors</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.ico">
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\\[','\\]']],
+            processEscapes: true
+        }
+    });
+</script>
+</head>
+
+<body>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Instance Segmentation of Scene Sketches <br /> Using Natural Image Priors</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://mia-tang.com/" target="_blank">Mia Tang</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://yael-vinker.github.io/website/" target="_blank"> Yael Vinker</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://nauhcnay.github.io/" target="_blank"> Chuan Yan</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://lllyasviel.github.io/Style2PaintsResearch/lvmin" target="_blank"> Lvmin Zhang</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://graphics.stanford.edu/~maneesh/" target="_blank"> Maneesh Agrawala </a><sup>1</sup>
+              </span>
+            </div>
+
+            <div class="is-size-6 publication-authors">
+              <span class="author-block"><sup>1</sup> Stanford University</span>
+            </div>
+            <div class="is-size-6 publication-authors">
+              <span class="author-block"><sup>2</sup> MIT CSAIL</span>
+            </div>
+
+            <div class="is-size-3 venue ">
+              <span class="is-bold">SIGGRAPH 2025</span>
+            </div>
+
+
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="./static/InkLayer_arxiv.pdf" class="external-link button is-normal is-rounded" target="_blank">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper </span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2502.09608" class="external-link button is-normal is-rounded" target="_blank">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/miatang13/InkLayer" target="_blank" class="external-link button is-normal is-rounded">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://www.inkscenes-dataset.com/" target="_blank" class="external-link button is-normal is-rounded">
+                    <span class="icon" style="width: 16px;">
+                      <!-- <i class="fa-thin fa-database"></i> -->
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                        <path d="M448 80l0 48c0 44.2-100.3 80-224 80S0 172.2 0 128L0 80C0 35.8 100.3 0 224 0S448 35.8 448 80zM393.2 214.7c20.8-7.4 39.9-16.9 54.8-28.6L448 288c0 44.2-100.3 80-224 80S0 332.2 0 288L0 186.1c14.9 11.8 34 21.2 54.8 28.6C99.7 230.7 159.5 240 224 240s124.3-9.3 169.2-25.3zM0 346.1c14.9 11.8 34 21.2 54.8 28.6C99.7 390.7 159.5 400 224 400s124.3-9.3 169.2-25.3c20.8-7.4 39.9-16.9 54.8-28.6l0 85.9c0 44.2-100.3 80-224 80S0 476.2 0 432l0-85.9z" />
+                      </svg>
+                    </span>
+                    <span>Dataset</span>
+                  </a>
+                </span>
+
+                <!-- Video Link. -->
+                <!-- <span class="link-block">
+                  <a href="" class="external-link button is-normal is-rounded is-light">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video (Coming Soon)</span>
+                  </a>
+                </span> -->
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop place-items-center">
+      <div class="hero-body place-items-center">
+        <img src="./static/images/sketchseg_teaser_sm.png" alt="Banner Image" width="100%">
+        <h2 class="subtitle has-text-centered mt-4">
+          <span class="dnerf">InkLayer</span> performs instance segmentation of raster sketches. <br /> It effectively handles diverse types of sketches, accommodating variations in stroke style and complexity.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero overview">
+    <div class="container is-max-desktop place-items-center">
+      <div class="hero-body place-items-center">
+        <h2 class="title is-3">Table of Contents</h2>
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+              Here we present high-level descriptions and examples of our core contributions. Please refer to the paper for more in-depth details and results.📝
+            </p>
+          </div>
+        </div>
+        <img src="./static/images/contributions.png" alt="Banner Image" width="100%">
+
+      </div>
+    </div>
+  </section>
+
+
+  <section class="hero motivation">
+    <div class="container is-max-desktop place-items-center">
+      <div class="hero-body place-items-center">
+        <h2 class="title is-3">But first, why instance segmentation of sketches?</h2>
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+              🧑‍🎨 Sketching complex scenes is an expressive and iterative process, but editing and manipulating individual elements can be tedious without proper segmentation. This work is motivated by the need for a robust and precise instance segmentation method for sketches—one that empowers artists to refine their work with ease and flexibility.
+            </p>
+          </div>
+        </div>
+        <img src="./static/images/motivation_comics.png" alt="Banner Image" width="100%">
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Demo -->
+  <section class="section is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">What does <span class="dnerf">InkLayer</span> enable?</h2>
+          <video poster="" id="meerkat" autoplay controls muted loop height="100%">
+            <source src="./static/videos/meerkat_demo_no_audio.mp4" type="video/mp4">
+          </video>
+          <video poster="" id="toy_room" autoplay controls muted loop height="100%">
+            <source src="./static/videos/toy_room_demo_no_audio.mp4" type="video/mp4">
+          </video>
+          <div class="content has-text-justified mt-4">
+            <p> <b> Interactive interface for sketch editing. </b><span class="dnerf">InkLayer</span>'s segmentation and layering technique makes sketch editing effortless. With our interactive interface, users can upload a sketch, which is automatically segmented into ordered layers. This allows artists to easily move, copy, or delete objects without needing to manually redraw affected areas—streamlining the editing process and giving more control over their compositions..
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+  </section>
+  <!-- Handshake -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <img src="./static/images/thankful_handshake.png" alt="Banner Image" width="100%">
+    </div>
+  </section>
+
+  <!-- Sample Results. -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">What can <span class="dnerf">InkLayer</span> do?</h2>
+          <div class="content has-text-justified mt-4">
+            <p> We present instance segmentation results achieved by <span class="dnerf">InkLayer</span> across various stroke styles, demonstrating its robustness in handing varied styles and complexity. </p>
+          </div>
+
+          <!-- Our Sketches -->
+          <h2 class="title is-4"><span class="dnerf">InkLayer</span> on Real-World Sketches</h2>
+          <div id="results-carousel" class="carousel results-carousel" data-slides-to-show="1">
+            <div class="carousel-slide">
+              <img src="static/images/results/real_world/result_0.png" alt="results 0">
+            </div>
+            <div class="carousel-slide">
+              <img src="static/images/results/real_world/result_1.png" alt="results 1">
+            </div>
+            <div class="carousel-slide">
+              <img src="static/images/results/real_world/result_2.png" alt="results 2">
+            </div>
+            <div class="carousel-slide">
+              <img src="static/images/results/real_world/result_3.png" alt="results 3">
+            </div>
+          </div>
+          <div class="content has-text-justified mt-4">
+            <p>We demonstrate results on real-world sketches done by artists. These scenes span cozy indoor spaces, lively outdoor environments, expressive characters, and intricate object arrangements. Some sketches are minimal with clean strokes, while others are richly detailed with overlapping elements and fine textures, reflecting a range of artistic styles and complexity. </p>
+          </div>
+
+
+          <hr class="my-4" />
+
+          <!-- Dataset Sketches -->
+          <h2 class="title is-4"><span class="dnerf">InkLayer</span> on Dataset Sketches</h2>
+          <div id="results-carousel" class="carousel results-carousel" data-slides-to-show="1">
+            <div class="carousel-slide">
+              <img src="static/images/results/dataset/result_0.png" alt="results 0">
+            </div>
+            <div class="carousel-slide">
+              <img src="static/images/results/dataset/result_1.png" alt="results 1">
+            </div>
+            <div class="carousel-slide">
+              <img src="static/images/results/dataset/result_2.png" alt="results 2">
+            </div>
+          </div>
+          <div class="content has-text-justified mt-4">
+            <p>We demonstrate results on sketches sourced from semi-synthetic and fully synthetic datasets, covering a diverse range of structured and organic scenes. These include charming suburban houses, bustling townscapes, and serene parks filled with people and animals. Some sketches depict everyday moments, such as dining scenes and workspace setups, while others capture dynamic action, including sports and outdoor activities. The dataset also features a variety of subjects like farm animals, intricate floral arrangements, and highly detailed objects. These synthetic sketches balance realism with stylization, making them a valuable benchmark for testing segmentation across different levels of abstraction and complexity. </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- method -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">How does <span class="dnerf">InkLayer</span> work?</h2>
+          <div class="content has-text-justified mt-4">
+            <p class="font-bold">Given a raster sketch, our goal is to produce a segmentation map such that pixels belonging to the same object instance are grouped together. Based on the segmentation map, we also divide the sketch into layers, sorted by depth. </p>
+          </div>
+
+          <!-- main methods -->
+          <h2 class="title is-4">Overall pipeline</h2>
+          <img src="./static/images/methods_figure.png" alt="Methods Figure" />
+          <div class="content has-text-justified mt-4">
+            <p> Given an input sketch image, our framework first detects bounding boxes using a customized Grounding DINO to obtain region proposals, and then perform segmentation with SAM models. The localization and segmentation are refined by incorporating the depth features. The result segmentation can be viewed as a layered decomposition of object components in the original sketch.
+            </p>
+          </div>
+          <!-- main methods -->
+
+          <!-- object detection -->
+          <h2 class="title is-4">Sketch-aware object detection</h2>
+          <div class="content has-text-justified mt-4">
+            <p><b>🟥 Challenge: </b> Grounding DINO is an object detection model which outputs bounding boxes for recognized object instances, based on a given text prompt describing the scene. While effective for natural images, the model in its original configuration demonstrates limited generalization to sketches. </p>
+          </div>
+
+          <div class="content has-text-justified  place-items-center ">
+            <img src="./static/images/class_agnostic_motivation.jpeg" alt="Class Agnostic Motivation" width="80%" />
+            <h4 class="black has-text-centered mt-4">
+              Our Insight: Object boundaries in sketches are usually defined by visual structure, not semantics.
+            </h4>
+            <p>
+              Compared to natural images, sketch datasets are tiny.
+              So instead of relying on scale, we need a fine-tuning strategy that can generalize well. So, which cues can we always rely on to spot objects in a sketch?
+              We observe that for sketches with different objects, scenes, and styles,
+              we can still identify each object almost instantly. For example, the two sketches above demonstrate this well. <br /><br />
+              Gestalt principles suggest we use visual cues like proximity, closure, and continuity to group strokes into objects. Even when content and style change, these perceptual signals for object boundaries stay the same.
+              <br /><br />
+              So, how do we enable a model do the same?
+            </p>
+          </div>
+
+          <div class="content has-text-justified place-items-center mt-4">
+            <img src="./static/images/data_change.png" alt="Data Change Label" width="60%" />
+            <p><b>✅ Our Solution: </b>
+              We fine-tune a Grounding DINO model specifically for sketches. We make use of the SketchyScene dataset, and to enable class-agnostic detection of any objects across sketches, the key change we made was to the training data.
+              <br /> <br />
+              We relabeled every instance in the dataset as “object.” Whether it's a tree, a horse, or a cloud — they're all treated the same. This gives the model far more examples for learning to distinguish between objects. We finetune Grounding DINO with this modified SketchyScene dataset, and at inference time, we just prompt it with “object,” and it returns bounding boxes for every object it sees.
+              <br /> <br />
+              <b> Our fine-tuning technique proves highly effective, achieving a substantial improvement in GroundingDINO's detection performance on sketches, with Average Precision increasing from 26% to 74%. </b> Please refer to the paper for technical details and numerical evaluations.
+            </p>
+          </div>
+          <!-- object detection -->
+
+          <!-- depth ordering -->
+          <h2 class="title is-4">Resolving ambiguities in overlapping regions</h2>
+          <img src="./static/images/depth_sort_resized.png" alt="Depth Sort Figure" />
+          <div class="content has-text-justified mt-4">
+            <p><b>🟥 Challenge: </b> We extract segmentation masks by prompting Segment Anything (SAM) with the bounding boxes. However, overlapping bounding boxes often lead to problematic mask overlaps. For example, a couch's mask might extend over a cat's ear. To ensure accurate segmentation, pixels in these regions must be assigned to a single object. </p>
+            <p><b>✅ Our Solution: </b>We use an off-the-shelf depth estimation model to extract the sketch's depth map $D$. The depth map $D$ is sampled along sketch pixels at evenly spaced points, and the sampled points are grouped by their corresponding object (e.g., $P_i$ corresponds to the $i$'th object). Each object is assigned a depth score based on the majority of depth values from the sampled points. Ambiguous pixels are then assigned to the mask with the highest depth score, prioritizing foreground objects.
+            </p>
+          </div>
+          <!-- depth ordering -->
+
+          <!-- layer completion -->
+          <h2 class="title is-4">Object layer completion</h2>
+          <img src="./static/images/inpainting_pipe_resized.png" alt="Inpainting Pipeline Figure" />
+          <div class="content has-text-justified mt-4">
+            <p><b>🟥 Challenge: </b> In complex scenes with multiple objects, occlusion often leaves some objects incomplete, making it tricky to move them elsewhere. </p>
+            <p><b>✅ Our Solution: </b>As a final step we extract complete layers for each object in the sketch, inpainting any occluded regions using a pretrained SDXL inpainting model. The goal of this stage is to support basic sketch editing operations, such as translation and scaling. The inpainting mask for each object is defined by intersecting overlapping masks with the object's bounding box.
+            </p>
+          </div>
+          <!-- layer completion -->
+        </div>
+      </div>
+  </section>
+  <!-- method -->
+
+
+  <!-- dataset -->
+  <section class="section is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3"> <span class="dnerf">InkScenes</span> Dataset</h2>
+          <div class="content has-text-justified mt-4">
+            <p class="font-bold"> To evaluate our performance across a diverse set of sketches, we construct a synthetic annotated scene-sketch dataset. This dataset focuses on three key axes of variation, designed to extend existing datasets: (1) drawing style, (2) stroke style, and (3) object categories. </p>
+
+            <p>For more information on using the dataset, please checkout our dataset page: <a href="https://www.inkscenes-dataset.com/" target="_blank">Dataset Browser</a>.</p>
+          </div>
+          <img src="./static/images/dataset_variations.png" alt="Dataset Variations Figure" />
+
+          <div id="results-carousel" class="carousel results-carousel" data-slides-to-show="1">
+            <div class="carousel-slide">
+              <img src="static/images/dataset/sample_0.png" alt="sample 0">
+            </div>
+            <div class="carousel-slide">
+              <img src="static/images/dataset/sample_1.png" alt="sample 1">
+            </div>
+            <div class="carousel-slide">
+              <img src="static/images/dataset/sample_2.png" alt="sample 2">
+            </div>
+            <div class="carousel-slide">
+              <img src="static/images/dataset/sample_3.png" alt="sample 3">
+            </div>
+            <div class="carousel-slide">
+              <img src="static/images/dataset/sample_4.png" alt="sample 4">
+            </div>
+
+            <div class="carousel-slide">
+              <img src="static/images/dataset/sample_5.png" alt="sample 5">
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+  </section>
+  <!-- dataset -->
+
+  <!-- Acknowledgement -->
+  <!-- <section class="section is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Acknowledgements </h2>
+          <div class="content has-text-justified mt-4">
+          </div>
+        </div>
+      </div>
+  </section> -->
+  <!-- Acknowledgement -->
+
+  <section class="section" id="BibTeX">
+    <div class="container is-four-fifths content">
+      <div class="text-center">
+        <h2 class="title">BibTeX</h2>
+      </div>
+      <pre><code>
+        @inproceedings{tang2025inklayer,
+          author = {Tang, Mia and Vinker, Yael and Yan, Chuan and Zhang, Lvmin and Agrawala, Maneesh},
+          title = {Instance Segmentation of Scene Sketches Using Natural Image Priors},
+          year = {2025},
+          isbn = {9798400715402},
+          publisher = {Association for Computing Machinery},
+          address = {New York, NY, USA},
+          url = {https://doi.org/10.1145/3721238.3730606},
+          doi = {10.1145/3721238.3730606},
+          articleno = {96},
+          numpages = {10},
+          keywords = {Sketch Segmentation, Sketch Understanding, Sketch Editing},
+          series = {SIGGRAPH Conference Papers '25}
+        }
+  </code></pre>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            <p>
+              Website source code based on the <a href="https://nerfies.github.io/">Nerfies</a> project page. If you want to reuse their <a href="https://github.com/nerfies/nerfies.github.io">source code</a>, please credit them appropriately.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
