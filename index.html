@@ -12,7 +12,7 @@
   </script>
   <meta charset="utf-8">
   <meta name="description" content="VCUG Segmentation with Click-Guided Query Optimization for Post Hoc Refinement.">
-  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="keywords" content="VCUG, segmentation, interactive segmentation, query optimization, Mask2Former">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VCUG Segmentation</title>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -28,8 +28,6 @@
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="data:,">
 
-
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
@@ -44,10 +42,12 @@
             processEscapes: true
         }
     });
-</script>
+  </script>
 </head>
 
 <body>
+
+  <!-- Title & Authors -->
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
@@ -59,19 +59,19 @@
                 <a href="https://www.linkedin.com/in/prit-kanadiya/" target="_blank">Prit Kanadiya</a><sup>1</sup>,
               </span>
               <span class="author-block">
-                <a href="" target="_blank"> N. Pushpaketu</a><sup>2</sup>,
+                <a href="" target="_blank">N. Pushpaketu</a><sup>2</sup>,
               </span>
               <span class="author-block">
-                <a href="" target="_blank"> Varun Guttikonda</a><sup>2</sup>,
+                <a href="" target="_blank">Varun Guttikonda</a><sup>2</sup>,
               </span>
               <span class="author-block">
-                <a href="" target="_blank"> Upendra Chowdary P.</a><sup>2</sup>,
+                <a href="" target="_blank">Upendra Chowdary P.</a><sup>2</sup>,
               </span>
               <span class="author-block">
-                <a href="" target="_blank"> N. Mallikarjuna Reddy </a><sup>2</sup>
+                <a href="" target="_blank">N. Mallikarjuna Reddy</a><sup>2</sup>,
               </span>
               <span class="author-block">
-                <a href="https://vineet-gandhi.github.io/" target="_blank"> Vineet Gandhi </a><sup>1</sup>
+                <a href="https://vineet-gandhi.github.io/" target="_blank">Vineet Gandhi</a><sup>1</sup>
               </span>
             </div>
 
@@ -81,58 +81,22 @@
             <div class="is-size-6 publication-authors">
               <span class="author-block"><sup>2</sup> Yashoda Hospitals, Hyderabad, India</span>
             </div>
-              </div>
-
-            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Hero Teaser -->
-  <section class="hero teaser">
-    <div class="container is-max-desktop place-items-center">
-      <div class="hero-body place-items-center">
-        <h2 class="subtitle has-text-centered mt-4">
-          <b>tl;dr:</b> We do VCUG segmentation and then refine the masks interactively
-        </h2>
-        
-        <video class="teaser-video mt-4" autoplay muted loop playsinline width="100%">
-          <source src="./static/videos/teaser_01.mp4" type="video/mp4">
-        </video>
-        
-      </div>
+  <!-- tl;dr -->
+  <section class="section pt-2 pb-2">
+    <div class="container is-max-desktop">
+      <h2 class="subtitle has-text-centered">
+        <b>tl;dr:</b> We do VCUG segmentation and then refine the masks interactively
+      </h2>
     </div>
   </section>
 
-  <!-- More Samples -->
-  <section class="hero is-light is-small">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <h2 class="title is-3 has-text-centered">More Samples</h2>
-        <div id="results-carousel" class="carousel results-carousel">
-          <div class="item">
-            <video autoplay muted loop playsinline width="100%">
-              <source src="./static/videos/teaser_01.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="item">
-            <video autoplay muted loop playsinline width="100%">
-              <source src="./static/videos/teaser_02.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="item">
-            <video autoplay muted loop playsinline width="100%">
-              <source src="./static/videos/teaser_01.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- OVERVIEW -->
+  <!-- Overview -->
   <section class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
@@ -140,14 +104,56 @@
           <h2 class="title is-3">Overview</h2>
           <div class="content has-text-justified">
             <p>
-            We use query-based transformer architectures for VCUG segmentation and present a simple interactive way to refine the masks using clicks. 
-            For this, we perform optimization over the queries to support three core operations: 
-            <a href="#add_examples">instance addition</a>, 
-            <a href="#remove_examples">instance removal</a>, and 
-            <a href="#edit_examples">instance editing</a>. 
-            We show some examples below.
+              We use query-based transformer architectures for VCUG segmentation and present a simple interactive way to
+              <a href="#posthoc_refinement">refine the masks using clicks</a>.
+              For this, we perform optimization over the queries to support three core operations:
+              <a href="#instance_addition">instance addition</a>,
+              <a href="#instance_removal">instance removal</a>, and
+              <a href="#instance_editing">instance editing</a>.
             </p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Post Hoc Refinement -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3" id="posthoc_refinement">Post Hoc Refinement</h2>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-three-fifths">
+          <div class="content has-text-justified">
+            <p style="margin-top:1rem;">
+              We refine the Mask2Former segmentation outputs using query optimization. The examples below show how post hoc refinement works.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered mt-4">
+        <div class="column is-full">
+          <video class="teaser-video" autoplay muted loop playsinline width="100%">
+            <source src="./static/videos/teaser_01.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="columns is-centered mt-4">
+        <div class="column is-full">
+          <video class="teaser-video" autoplay muted loop playsinline width="100%">
+            <source src="./static/videos/teaser_02.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="columns is-centered mt-4">
+        <div class="column is-full">
+          <video class="teaser-video" autoplay muted loop playsinline width="100%">
+            <source src="./static/videos/teaser_03.mp4" type="video/mp4">
+          </video>
         </div>
       </div>
     </div>
@@ -168,29 +174,27 @@
           </div>
         </div>
       </div>
-      
+
       <div class="columns is-centered mt-4">
         <div class="column is-full">
           <img src="./static/images/addition_01.png" alt="Instance Addition Example 1" width="100%">
         </div>
       </div>
-      
+
       <div class="columns is-centered mt-4">
         <div class="column is-full">
           <img src="./static/images/addition_02.png" alt="Instance Addition Example 2" width="100%">
         </div>
       </div>
-      
+
       <div class="columns is-centered mt-4">
         <div class="column is-full">
           <img src="./static/images/addition_03.png" alt="Instance Addition Example 3" width="100%">
         </div>
       </div>
-    
-    <!-- FIX: Added missing closing tags for Instance Addition -->
     </div>
   </section>
-    
+
   <!-- Instance Removal -->
   <section class="section">
     <div class="container is-max-desktop">
@@ -206,26 +210,24 @@
           </div>
         </div>
       </div>
-      
+
       <div class="columns is-centered mt-4">
         <div class="column is-full">
           <img src="./static/images/removal_01.png" alt="Instance Removal Example 1" width="100%">
         </div>
       </div>
-      
+
       <div class="columns is-centered mt-4">
         <div class="column is-full">
           <img src="./static/images/removal_02.png" alt="Instance Removal Example 2" width="100%">
         </div>
       </div>
-      
+
       <div class="columns is-centered mt-4">
         <div class="column is-full">
           <img src="./static/images/removal_03.png" alt="Instance Removal Example 3" width="100%">
         </div>
       </div>
-
-    <!-- FIX: Added missing closing tags for Instance Removal -->
     </div>
   </section>
 
@@ -244,35 +246,34 @@
           </div>
         </div>
       </div>
-      
+
       <div class="columns is-centered mt-4">
         <div class="column is-full">
           <img src="./static/images/editing_01.png" alt="Instance Editing Example 1" width="100%">
         </div>
       </div>
-      
+
       <div class="columns is-centered mt-4">
         <div class="column is-full">
           <img src="./static/images/editing_02.png" alt="Instance Editing Example 2" width="100%">
         </div>
       </div>
-      
+
       <div class="columns is-centered mt-4">
         <div class="column is-full">
           <img src="./static/images/editing_03.png" alt="Instance Editing Example 3" width="100%">
         </div>
       </div>
-      
     </div>
   </section>
 
   <!-- Failure Cases -->
   <section class="section">
     <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column is-full has-text-centered">
-          <h2 class="title is-3" id="failure_cases">Failure Cases</h2>
-          <div class="columns is-centered has-text-centered">
+      <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3" id="failure_cases">Failure Cases</h2>
+      </div>
+      <div class="columns is-centered has-text-centered">
         <div class="column is-three-fifths">
           <div class="content has-text-justified">
             <p style="margin-top:1rem;">
@@ -281,7 +282,10 @@
           </div>
         </div>
       </div>
-          <video class="teaser-video mt-4" autoplay muted loop playsinline width="100%">
+
+      <div class="columns is-centered mt-4">
+        <div class="column is-full">
+          <video class="teaser-video" autoplay muted loop playsinline width="100%">
             <source src="./static/videos/failure_case_01.mp4" type="video/mp4">
           </video>
         </div>
@@ -289,32 +293,27 @@
     </div>
   </section>
 
-</body>
-
-<footer class="footer">
-  <div class="container is-max-desktop content">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <div class="content">
-          <p>
-            This website is licensed under a 
-            <a rel="license" 
-            href="http://creativecommons.org/licenses/by-sa/4.0/"
-            target="_blank">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>, 
-            and is based on the <a href="https://nerfies.github.io/" 
-            target="_blank">Nerfies</a> project. You are free to use the 
-            <a href="https://github.com/nerfies/nerfies.github.io"
-            target="_blank">source code</a> of this website,
-            but please keep these links in the footer, 
-            as requested by the authors.
-          </p>
+  <footer class="footer">
+    <div class="container is-max-desktop content">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="content">
+            <p>
+              This website is licensed under a
+              <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>,
+              and is based on the <a href="https://nerfies.github.io/" target="_blank">Nerfies</a> project.
+              You are free to use the
+              <a href="https://github.com/nerfies/nerfies.github.io" target="_blank">source code</a> of this website,
+              but please keep these links in the footer,
+              as requested by the authors.
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
-
+</body>
 
 </html>
