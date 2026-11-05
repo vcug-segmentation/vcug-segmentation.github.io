@@ -108,47 +108,13 @@
           <div class="content has-text-justified">
             <p>
               We use query-based transformer architectures for VCUG segmentation and present a simple interactive way to
-              <a href="#posthoc_refinement">refine the masks using clicks</a>.
+              refine the masks using clicks.
               For this, we perform optimization over the queries to support three core operations:
               <a href="#instance_addition">instance addition</a>,
               <a href="#instance_removal">instance removal</a>, and
               <a href="#instance_editing">instance editing</a>.
             </p>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Post Hoc Refinement -->
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <h2 class="title is-3" id="posthoc_refinement">Post Hoc Refinement</h2>
-      </div>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-three-fifths">
-          <div class="content has-text-justified">
-            <p style="margin-top:1rem;">
-              We refine the Mask2Former segmentation outputs using query optimization. The examples below show how post hoc refinement works.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="columns is-centered mt-4">
-        <div class="column is-full">
-          <video class="teaser-video" autoplay muted loop playsinline width="100%">
-            <source src="./static/videos/teaser_02.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-
-      <div class="columns is-centered mt-4">
-        <div class="column is-full">
-          <video class="teaser-video" autoplay muted loop playsinline width="100%">
-            <source src="./static/videos/teaser_03.mp4" type="video/mp4">
-          </video>
         </div>
       </div>
     </div>
@@ -245,6 +211,40 @@
       <div class="columns is-centered mt-4">
         <div class="column is-full">
           <img src="./static/images/editing_03.png" alt="Instance Editing Example 3" width="100%">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Post Hoc Refinement -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3" id="posthoc_refinement">Post Hoc Refinement</h2>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-three-fifths">
+          <div class="content has-text-justified">
+            <p style="margin-top:1rem;">
+              We combine the three operations to refine Mask2Former outputs. Each example below shows a full refinement session.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered mt-4">
+        <div class="column is-full">
+          <video class="teaser-video" autoplay muted loop playsinline width="100%">
+            <source src="./static/videos/teaser_02.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="columns is-centered mt-4">
+        <div class="column is-full">
+          <video class="teaser-video" autoplay muted loop playsinline width="100%">
+            <source src="./static/videos/teaser_03.mp4" type="video/mp4">
+          </video>
         </div>
       </div>
     </div>
