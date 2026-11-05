@@ -94,10 +94,14 @@
   <section class="hero teaser">
     <div class="container is-max-desktop place-items-center">
       <div class="hero-body place-items-center">
-        <img src="./static/images/hero_teaser.png" alt="VCUG Segmentation Banner" width="100%">
         <h2 class="subtitle has-text-centered mt-4">
           <b>tl;dr:</b> We do VCUG segmentation and then refine the masks interactively
         </h2>
+        
+        <video class="teaser-video mt-4" autoplay muted loop playsinline width="100%">
+          <source src="./static/videos/teaser.mp4" type="video/mp4">
+        </video>
+        
       </div>
     </div>
   </section>
@@ -242,6 +246,15 @@
       <div class="columns is-centered">
         <div class="column is-full has-text-centered">
           <h2 class="title is-3" id="failure_cases">Failure Cases</h2>
+          <div class="columns is-centered has-text-centered">
+        <div class="column is-three-fifths">
+          <div class="content has-text-justified">
+            <p style="margin-top:1rem;">
+              The optimization struggles to recover the target structure if the underlying feature space is highly noisy or ambiguous, such as the ureters in this sample.
+            </p>
+          </div>
+        </div>
+      </div>
           <video class="teaser-video mt-4" autoplay muted loop playsinline width="100%">
             <source src="./static/videos/failure_case_01.mp4" type="video/mp4">
           </video>
