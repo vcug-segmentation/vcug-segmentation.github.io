@@ -68,7 +68,7 @@
                 Upendra Chowdary P.<sup>2</sup>,
               </span>
               <span class="author-block">
-                <a href="https://www.yashodahospitals.com/doctor/hitec-city/urology/dr-mallikarjuna-reddy-n/" target="_blank">N. Mallikarjuna Reddy<sup>2</sup>,
+                <a href="https://www.yashodahospitals.com/doctor/hitec-city/urology/dr-mallikarjuna-reddy-n/" target="_blank">N. Mallikarjuna Reddy</a><sup>2</sup>,
               </span>
               <span class="author-block">
                 <a href="https://vineet-gandhi.github.io/" target="_blank">Vineet Gandhi</a><sup>1</sup>
@@ -91,7 +91,7 @@
   <section class="section pt-2 pb-2">
     <div class="container is-max-desktop">
       <h2 class="subtitle has-text-centered">
-        <b>tl;dr:</b> We do VCUG segmentation and then refine the masks interactively
+        <b>tl;dr:</b> We segment VCUG images and then refine the masks interactively
       </h2>
       <video class="teaser-video mt-4" autoplay muted loop playsinline width="100%">
         <source src="./static/videos/teaser_01.mp4" type="video/mp4">
@@ -107,9 +107,9 @@
           <h2 class="title is-3">Overview</h2>
           <div class="content has-text-justified">
             <p>
-              We use query-based transformer architectures for VCUG segmentation and present a simple interactive way to
+              We use query-based transformer architectures for voiding cystourethrogram (VCUG) segmentation and present a simple interactive way to
               refine the masks using clicks.
-              For this, we perform optimization over the queries to support three core operations:
+              For this, we optimize the queries to support three core operations:
               <a href="#instance_addition">instance addition</a>,
               <a href="#instance_removal">instance removal</a>, and
               <a href="#instance_editing">instance editing</a>.
@@ -130,7 +130,7 @@
         <div class="column is-three-fifths">
           <div class="content has-text-justified">
             <p style="margin-top:1rem;">
-              When the model misses a target structure, we can add the missing instance by optimizing a <b>dormant query</b> using a single click.
+              When the model misses a target structure, we can add the missing instance using a single click.
             </p>
           </div>
         </div>
@@ -166,7 +166,7 @@
         <div class="column is-three-fifths">
           <div class="content has-text-justified">
             <p style="margin-top:1rem;">
-              When the model predicts an incorrect structure, we can remove the instance by suppressing its corresponding <b>active query</b> using a single click.
+              When the model predicts an incorrect structure, we can remove the instance using a single click.
             </p>
           </div>
         </div>
@@ -190,7 +190,7 @@
         <div class="column is-three-fifths">
           <div class="content has-text-justified">
             <p style="margin-top:1rem;">
-              We can edit existing masks by using a few positive and negative clicks to optimize their corresponding <b>active queries</b>.
+              We can edit existing masks using a few positive and negative clicks.
             </p>
           </div>
         </div>
@@ -226,7 +226,7 @@
         <div class="column is-three-fifths">
           <div class="content has-text-justified">
             <p style="margin-top:1rem;">
-              We combine the three operations to refine Mask2Former outputs. Each example below shows a full refinement session.
+              We combine the three operations to refine the outputs of query-based transformers such as Mask2Former. Each example below shows a full post hoc refinement session.
             </p>
           </div>
         </div>
