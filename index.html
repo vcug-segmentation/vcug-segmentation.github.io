@@ -14,7 +14,7 @@
   <meta name="description" content="VCUG Segmentation with Click-Guided Query Optimization for Post Hoc Refinement.">
   <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>VCUG Segmentation with Click-Guided Query Optimization for Post Hoc Refinement</title>
+  <title>VCUG Segmentation</title>
   <script src="https://cdn.tailwindcss.com"></script>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.ico">
+  <link rel="icon" href="data:,">
 
 
 
@@ -81,56 +81,6 @@
             <div class="is-size-6 publication-authors">
               <span class="author-block"><sup>2</sup> Yashoda Hospitals, Hyderabad, India</span>
             </div>
-
-            <!-- Not accepted anywhere yet! -->
-            <!-- <div class="is-size-3 venue ">
-              <span class="is-bold">SIGGRAPH 2025</span>
-            </div> -->
-
-
-            <!-- We do not have any assets for now -->
-            <!-- 
-            <div class="column has-text-centered">
-              <div class="publication-links">
-
-                <span class="link-block">
-                  <a href="./static/InkLayer_arxiv.pdf" class="external-link button is-normal is-rounded" target="_blank">
-                    <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                    </span>
-                    <span>Paper </span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/2502.09608" class="external-link button is-normal is-rounded" target="_blank">
-                    <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                    </span>
-                    <span>arXiv</span>
-                  </a>
-                </span>
-
-                <span class="link-block">
-                  <a href="https://github.com/miatang13/InkLayer" target="_blank" class="external-link button is-normal is-rounded">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code</span>
-                  </a>
-                </span>
-
-                <span class="link-block">
-                  <a href="https://www.inkscenes-dataset.com/" target="_blank" class="external-link button is-normal is-rounded">
-                    <span class="icon" style="width: 16px;">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                        <path d="M448 80l0 48c0 44.2-100.3 80-224 80S0 172.2 0 128L0 80C0 35.8 100.3 0 224 0S448 35.8 448 80zM393.2 214.7c20.8-7.4 39.9-16.9 54.8-28.6L448 288c0 44.2-100.3 80-224 80S0 332.2 0 288L0 186.1c14.9 11.8 34 21.2 54.8 28.6C99.7 230.7 159.5 240 224 240s124.3-9.3 169.2-25.3zM0 346.1c14.9 11.8 34 21.2 54.8 28.6C99.7 390.7 159.5 400 224 400s124.3-9.3 169.2-25.3c20.8-7.4 39.9-16.9 54.8-28.6l0 85.9c0 44.2-100.3 80-224 80S0 476.2 0 432l0-85.9z" />
-                      </svg>
-                    </span>
-                    <span>Dataset</span>
-                  </a>
-                </span>
-
-                </span> -->
               </div>
 
             </div>
@@ -140,18 +90,168 @@
     </div>
   </section>
 
+  <!-- Hero Teaser -->
   <section class="hero teaser">
     <div class="container is-max-desktop place-items-center">
       <div class="hero-body place-items-center">
-        <img src="./static/images/hero_teaser.png" alt="Banner Image" width="100%">
+        <img src="./static/images/hero_teaser.png" alt="VCUG Segmentation Banner" width="100%">
         <h2 class="subtitle has-text-centered mt-4">
-          <!-- <span class="dnerf">InkLayer</span> performs instance segmentation of raster sketches. <br /> It effectively handles diverse types of sketches, accommodating variations in stroke style and complexity. -->
+          <b>tl;dr:</b> We do VCUG segmentation and then refine the masks interactively
         </h2>
       </div>
     </div>
   </section>
 
+  <!-- OVERVIEW -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-three-fifths">
+          <h2 class="title is-3">Overview</h2>
+          <div class="content has-text-justified">
+            <p>
+            We use query-based transformer architectures for VCUG segmentation and present a simple interactive way to refine the masks using clicks. 
+            For this, we perform optimization over the queries to support three core operations: 
+            <a href="#add_examples">instance addition</a>, 
+            <a href="#remove_examples">instance removal</a>, and 
+            <a href="#edit_examples">instance editing</a>. 
+            We show some examples below.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instance Addition -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3" id="instance_addition">Instance Addition</h2>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-three-fifths">
+          <div class="content has-text-justified">
+            <p style="margin-top:1rem;">
+              When the model misses a target structure, we can add the missing instance by optimizing a <b>dormant query</b> using a single click.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="columns is-centered mt-4">
+        <div class="column is-full">
+          <img src="./static/images/addition_01.png" alt="Instance Addition Example 1" width="100%">
+        </div>
+      </div>
+      
+      <div class="columns is-centered mt-4">
+        <div class="column is-full">
+          <img src="./static/images/addition_02.png" alt="Instance Addition Example 2" width="100%">
+        </div>
+      </div>
+      
+      <div class="columns is-centered mt-4">
+        <div class="column is-full">
+          <img src="./static/images/addition_03.png" alt="Instance Addition Example 3" width="100%">
+        </div>
+      </div>
+    
+    <!-- Instance Removal -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3" id="instance_removal">Instance Removal</h2>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-three-fifths">
+          <div class="content has-text-justified">
+            <p style="margin-top:1rem;">
+              When the model predicts an incorrect structure, we can remove the instance by suppressing its corresponding <b>active query</b> using a single click.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="columns is-centered mt-4">
+        <div class="column is-full">
+          <img src="./static/images/removal_01.png" alt="Instance Removal Example 1" width="100%">
+        </div>
+      </div>
+      
+      <div class="columns is-centered mt-4">
+        <div class="column is-full">
+          <img src="./static/images/removal_02.png" alt="Instance Removal Example 2" width="100%">
+        </div>
+      </div>
+      
+      <div class="columns is-centered mt-4">
+        <div class="column is-full">
+          <img src="./static/images/removal_03.png" alt="Instance Removal Example 3" width="100%">
+        </div>
+      </div>
+
+      <!-- Instance Editing -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3" id="instance_editing">Instance Editing</h2>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-three-fifths">
+          <div class="content has-text-justified">
+            <p style="margin-top:1rem;">
+              We can edit existing masks by using a few positive and negative clicks to optimize their corresponding <b>active queries</b>.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="columns is-centered mt-4">
+        <div class="column is-full">
+          <img src="./static/images/editing_01.png" alt="Instance Editing Example 1" width="100%">
+        </div>
+      </div>
+      
+      <div class="columns is-centered mt-4">
+        <div class="column is-full">
+          <img src="./static/images/editing_02.png" alt="Instance Editing Example 2" width="100%">
+        </div>
+      </div>
+      
+      <div class="columns is-centered mt-4">
+        <div class="column is-full">
+          <img src="./static/images/editing_03.png" alt="Instance Editing Example 3" width="100%">
+        </div>
+      </div>
+      
+    </div>
+  </section>
 
 </body>
+
+<footer class="footer">
+  <div class="container is-max-desktop content">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div class="content">
+          <p>
+            This website is licensed under a 
+            <a rel="license" 
+            href="http://creativecommons.org/licenses/by-sa/4.0/"
+            target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>, 
+            and is based on the <a href="https://nerfies.github.io/" 
+            target="_blank">Nerfies</a> project. You are free to use the 
+            <a href="https://github.com/nerfies/nerfies.github.io"
+            target="_blank">source code</a> of this website,
+            but please keep these links in the footer, 
+            as requested by the authors.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
 
 </html>
