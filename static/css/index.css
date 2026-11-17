@@ -182,3 +182,24 @@ body {
 .is-light { 
   background-color: rgb(250, 250, 250) !important;
 }
+
+.zoom-container {
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.zoom-container img {
+  display: block;
+  width: 100%;
+  transition: transform 0.2s ease;
+}
+
+.zoom-container.is-zoomed img {
+  transform: scale(2.5);
+}
+
+.subcaption {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 0.4rem;
+}

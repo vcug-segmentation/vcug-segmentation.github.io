@@ -75,4 +75,24 @@ $(document).ready(function () {
 
   bulmaSlider.attach();
 
+  // Hover-to-zoom, synchronized within a .zoom-group
+  $('.zoom-container').each(function () {
+    var container = this;
+    var group = $(container).closest('.zoom-group');
+    var targets = group.length ? group.find('.zoom-container') : $(container);
+
+    $(container).on('mousemove', function (e) {
+      var rect = container.getBoundingClientRect();
+      var x = ((e.clientX - rect.left) / rect.width) * 100;
+      var y = ((e.clientY - rect.top) / rect.height) * 100;
+      targets.addClass('is-zoomed');
+      targets.find('img').css('transform-origin', x + '% ' + y + '%');
+    });
+
+    $(container).on('mouseleave', function () {
+      targets.removeClass('is-zoomed');
+      targets.find('img').css('transform-origin', 'center center');
+    });
+  });
+
 })
