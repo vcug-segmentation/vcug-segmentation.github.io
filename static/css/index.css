@@ -205,13 +205,13 @@ body {
 }
 
 /* Full-width divider + alternating tint, only on .divided sections */
-.section.divided {
+/* .section.divided {
   border-top: 1px solid #e6e6e6;
 }
 
 .section.divided:nth-of-type(even) {
   background-color: #f7f8fa;
-}
+} */
 
 .footer {
   background-color: #fff;
